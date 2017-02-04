@@ -56,7 +56,7 @@ class Document(object):
 		self.body="Hello!"
 		self.filePath=os.path.dirname(os.path.realpath(__file__))
 		self.filename=self.filePath+"/MyPyTex_output.tex"
-		self.update()
+		# self.update()
 		
 	def update(self):
 		self.fullPathToFile=self.filename

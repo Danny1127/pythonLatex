@@ -4,6 +4,8 @@ import os
 from pythonLatex import latexCompile
 from pythonLatex import MyPyTex
 
+string=""
+
 points=[]
 for k in range(100):
 	points.append([k,k*k])
@@ -12,11 +14,22 @@ line=MyPyTex.TIKZLine()
 line.points=points
 line.attributes="draw=red,very thick"
 line.update()
-#line.string 
+string+=line.string
+
+
+points=[]
+for k in range(100):
+	points.append([k,100*100-k*k])
+
+line=MyPyTex.TIKZLine()
+line.points=points
+line.attributes="draw=blue,very thick"
+line.update()
+string+=line.string
 
 
 pic=MyPyTex.TIKZPlot()
-pic.lineString=line.string
+pic.lineString=string
 pic.xTicks.labelPositions=[10*x for x in range(11)]
 pic.xGrid.labelPositions=[10*x for x in range(11)]
 pic.yTicks.labelPositions=[1000*x for x in range(11)]
@@ -33,7 +46,7 @@ pic.update()
 doc=MyPyTex.Document()
 doc.body=pic.string
 doc.type='picture'#minimal,plain,picture
-doc.filename=doc.filename=os.path.abspath('exampleOutput.tex')
+doc.filename=os.path.abspath('exampleOutput.tex')
 doc.update()
 doc.compile()
 doc.open() 
