@@ -1,0 +1,225 @@
+\documentclass[11pt]{article}
+\usepackage{geometry,amsmath,amssymb,datetime,color,everypage,lastpage,multirow,textpos,nicefrac,setspace,tikz}
+\usetikzlibrary{calc,arrows,automata,shapes.misc,shapes.arrows,chains,matrix,positioning,scopes,decorations.pathmorphing,shadows,patterns,decorations.markings}
+
+
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{2mm}\begin{document}
+
+
+\def\xlow{0}
+\def\xhigh{10}
+\def\xscale{1.50}
+\def\ylow{0}
+\def\yhigh{10}
+\def\yscale{1.50}
+\def\myscale{1.00}
+
+\begin{tikzpicture}[xscale=\xscale,yscale=\yscale]
+\draw [fill=red!32.7561500462!blue,opacity=.4] (0.50,9.50) circle (0.16);
+\node at (0.50,9.50) {1,1};
+\draw [fill=red!95.4569767922!blue,opacity=.4] (0.50,8.50) circle (0.48);
+\node at (0.50,8.50) {1,2};
+\draw [fill=red!21.1907764301!blue,opacity=.4] (0.50,7.50) circle (0.11);
+\node at (0.50,7.50) {1,3};
+\draw [fill=red!64.0004595209!blue,opacity=.4] (0.50,6.50) circle (0.32);
+\node at (0.50,6.50) {1,4};
+\draw [fill=red!80.3622922842!blue,opacity=.4] (0.50,5.50) circle (0.40);
+\node at (0.50,5.50) {1,5};
+\draw [fill=red!53.8965746735!blue,opacity=.4] (0.50,4.50) circle (0.27);
+\node at (0.50,4.50) {1,6};
+\draw [fill=red!88.4836223284!blue,opacity=.4] (0.50,3.50) circle (0.44);
+\node at (0.50,3.50) {1,7};
+\draw [fill=red!90.1964422875!blue,opacity=.4] (0.50,2.50) circle (0.45);
+\node at (0.50,2.50) {1,8};
+\draw [fill=red!1.58511454674!blue,opacity=.4] (0.50,1.50) circle (0.01);
+\node at (0.50,1.50) {1,9};
+\draw [fill=red!95.9479900008!blue,opacity=.4] (0.50,0.50) circle (0.48);
+\node at (0.50,0.50) {1,10};
+\draw [fill=red!63.5630440383!blue,opacity=.4] (1.50,9.50) circle (0.32);
+\node at (1.50,9.50) {2,1};
+\draw [fill=red!43.390253691!blue,opacity=.4] (1.50,8.50) circle (0.22);
+\node at (1.50,8.50) {2,2};
+\draw [fill=red!83.3841265264!blue,opacity=.4] (1.50,7.50) circle (0.42);
+\node at (1.50,7.50) {2,3};
+\draw [fill=red!21.7689567213!blue,opacity=.4] (1.50,6.50) circle (0.11);
+\node at (1.50,6.50) {2,4};
+\draw [fill=red!79.0675734023!blue,opacity=.4] (1.50,5.50) circle (0.40);
+\node at (1.50,5.50) {2,5};
+\draw [fill=red!12.8805075981!blue,opacity=.4] (1.50,4.50) circle (0.06);
+\node at (1.50,4.50) {2,6};
+\draw [fill=red!49.2688140717!blue,opacity=.4] (1.50,3.50) circle (0.25);
+\node at (1.50,3.50) {2,7};
+\draw [fill=red!7.9245457288!blue,opacity=.4] (1.50,2.50) circle (0.04);
+\node at (1.50,2.50) {2,8};
+\draw [fill=red!45.865559863!blue,opacity=.4] (1.50,1.50) circle (0.23);
+\node at (1.50,1.50) {2,9};
+\draw [fill=red!94.6843417864!blue,opacity=.4] (1.50,0.50) circle (0.47);
+\node at (1.50,0.50) {2,10};
+\draw [fill=red!22.1374240137!blue,opacity=.4] (2.50,9.50) circle (0.11);
+\node at (2.50,9.50) {3,1};
+\draw [fill=red!70.8605226132!blue,opacity=.4] (2.50,8.50) circle (0.35);
+\node at (2.50,8.50) {3,2};
+\draw [fill=red!9.81270951838!blue,opacity=.4] (2.50,7.50) circle (0.05);
+\node at (2.50,7.50) {3,3};
+\draw [fill=red!73.9478622984!blue,opacity=.4] (2.50,6.50) circle (0.37);
+\node at (2.50,6.50) {3,4};
+\draw [fill=red!57.595136337!blue,opacity=.4] (2.50,5.50) circle (0.29);
+\node at (2.50,5.50) {3,5};
+\draw [fill=red!12.3970616349!blue,opacity=.4] (2.50,4.50) circle (0.06);
+\node at (2.50,4.50) {3,6};
+\draw [fill=red!80.2332689988!blue,opacity=.4] (2.50,3.50) circle (0.40);
+\node at (2.50,3.50) {3,7};
+\draw [fill=red!47.5548898285!blue,opacity=.4] (2.50,2.50) circle (0.24);
+\node at (2.50,2.50) {3,8};
+\draw [fill=red!49.8772647928!blue,opacity=.4] (2.50,1.50) circle (0.25);
+\node at (2.50,1.50) {3,9};
+\draw [fill=red!14.9863758375!blue,opacity=.4] (2.50,0.50) circle (0.07);
+\node at (2.50,0.50) {3,10};
+\draw [fill=red!43.9661242009!blue,opacity=.4] (3.50,9.50) circle (0.22);
+\node at (3.50,9.50) {4,1};
+\draw [fill=red!37.409878031!blue,opacity=.4] (3.50,8.50) circle (0.19);
+\node at (3.50,8.50) {4,2};
+\draw [fill=red!59.4755111652!blue,opacity=.4] (3.50,7.50) circle (0.30);
+\node at (3.50,7.50) {4,3};
+\draw [fill=red!5.42961616488!blue,opacity=.4] (3.50,6.50) circle (0.03);
+\node at (3.50,6.50) {4,4};
+\draw [fill=red!39.9957032185!blue,opacity=.4] (3.50,5.50) circle (0.20);
+\node at (3.50,5.50) {4,5};
+\draw [fill=red!81.3716078443!blue,opacity=.4] (3.50,4.50) circle (0.41);
+\node at (3.50,4.50) {4,6};
+\draw [fill=red!17.4641999324!blue,opacity=.4] (3.50,3.50) circle (0.09);
+\node at (3.50,3.50) {4,7};
+\draw [fill=red!70.9651537737!blue,opacity=.4] (3.50,2.50) circle (0.35);
+\node at (3.50,2.50) {4,8};
+\draw [fill=red!86.5879853967!blue,opacity=.4] (3.50,1.50) circle (0.43);
+\node at (3.50,1.50) {4,9};
+\draw [fill=red!19.9251292914!blue,opacity=.4] (3.50,0.50) circle (0.10);
+\node at (3.50,0.50) {4,10};
+\draw [fill=red!21.4450266403!blue,opacity=.4] (4.50,9.50) circle (0.11);
+\node at (4.50,9.50) {5,1};
+\draw [fill=red!96.227911788!blue,opacity=.4] (4.50,8.50) circle (0.48);
+\node at (4.50,8.50) {5,2};
+\draw [fill=red!25.2125624269!blue,opacity=.4] (4.50,7.50) circle (0.13);
+\node at (4.50,7.50) {5,3};
+\draw [fill=red!93.6264424978!blue,opacity=.4] (4.50,6.50) circle (0.47);
+\node at (4.50,6.50) {5,4};
+\draw [fill=red!37.0121793744!blue,opacity=.4] (4.50,5.50) circle (0.19);
+\node at (4.50,5.50) {5,5};
+\draw [fill=red!99.4375514241!blue,opacity=.4] (4.50,4.50) circle (0.50);
+\node at (4.50,4.50) {5,6};
+\draw [fill=red!42.7736100848!blue,opacity=.4] (4.50,3.50) circle (0.21);
+\node at (4.50,3.50) {5,7};
+\draw [fill=red!21.8998895671!blue,opacity=.4] (4.50,2.50) circle (0.11);
+\node at (4.50,2.50) {5,8};
+\draw [fill=red!3.50717322013!blue,opacity=.4] (4.50,1.50) circle (0.02);
+\node at (4.50,1.50) {5,9};
+\draw [fill=red!94.3822197731!blue,opacity=.4] (4.50,0.50) circle (0.47);
+\node at (4.50,0.50) {5,10};
+\draw [fill=red!87.6707696463!blue,opacity=.4] (5.50,9.50) circle (0.44);
+\node at (5.50,9.50) {6,1};
+\draw [fill=red!96.5308454625!blue,opacity=.4] (5.50,8.50) circle (0.48);
+\node at (5.50,8.50) {6,2};
+\draw [fill=red!10.9364675808!blue,opacity=.4] (5.50,7.50) circle (0.05);
+\node at (5.50,7.50) {6,3};
+\draw [fill=red!67.8368662814!blue,opacity=.4] (5.50,6.50) circle (0.34);
+\node at (5.50,6.50) {6,4};
+\draw [fill=red!48.7331041323!blue,opacity=.4] (5.50,5.50) circle (0.24);
+\node at (5.50,5.50) {6,5};
+\draw [fill=red!81.162894684!blue,opacity=.4] (5.50,4.50) circle (0.41);
+\node at (5.50,4.50) {6,6};
+\draw [fill=red!51.7627008056!blue,opacity=.4] (5.50,3.50) circle (0.26);
+\node at (5.50,3.50) {6,7};
+\draw [fill=red!17.7894687419!blue,opacity=.4] (5.50,2.50) circle (0.09);
+\node at (5.50,2.50) {6,8};
+\draw [fill=red!49.5478246178!blue,opacity=.4] (5.50,1.50) circle (0.25);
+\node at (5.50,1.50) {6,9};
+\draw [fill=red!11.1547153932!blue,opacity=.4] (5.50,0.50) circle (0.06);
+\node at (5.50,0.50) {6,10};
+\draw [fill=red!47.1482180727!blue,opacity=.4] (6.50,9.50) circle (0.24);
+\node at (6.50,9.50) {7,1};
+\draw [fill=red!48.1576972503!blue,opacity=.4] (6.50,8.50) circle (0.24);
+\node at (6.50,8.50) {7,2};
+\draw [fill=red!40.9416956583!blue,opacity=.4] (6.50,7.50) circle (0.20);
+\node at (6.50,7.50) {7,3};
+\draw [fill=red!56.1098595666!blue,opacity=.4] (6.50,6.50) circle (0.28);
+\node at (6.50,6.50) {7,4};
+\draw [fill=red!0.593979177367!blue,opacity=.4] (6.50,5.50) circle (0.00);
+\node at (6.50,5.50) {7,5};
+\draw [fill=red!93.8906784874!blue,opacity=.4] (6.50,4.50) circle (0.47);
+\node at (6.50,4.50) {7,6};
+\draw [fill=red!62.9521558966!blue,opacity=.4] (6.50,3.50) circle (0.31);
+\node at (6.50,3.50) {7,7};
+\draw [fill=red!22.7650810834!blue,opacity=.4] (6.50,2.50) circle (0.11);
+\node at (6.50,2.50) {7,8};
+\draw [fill=red!52.3577958956!blue,opacity=.4] (6.50,1.50) circle (0.26);
+\node at (6.50,1.50) {7,9};
+\draw [fill=red!50.8663269896!blue,opacity=.4] (6.50,0.50) circle (0.25);
+\node at (6.50,0.50) {7,10};
+\draw [fill=red!6.56422613533!blue,opacity=.4] (7.50,9.50) circle (0.03);
+\node at (7.50,9.50) {8,1};
+\draw [fill=red!70.0349646444!blue,opacity=.4] (7.50,8.50) circle (0.35);
+\node at (7.50,8.50) {8,2};
+\draw [fill=red!37.8831214992!blue,opacity=.4] (7.50,7.50) circle (0.19);
+\node at (7.50,7.50) {8,3};
+\draw [fill=red!28.303054751!blue,opacity=.4] (7.50,6.50) circle (0.14);
+\node at (7.50,6.50) {8,4};
+\draw [fill=red!5.40108182297!blue,opacity=.4] (7.50,5.50) circle (0.03);
+\node at (7.50,5.50) {8,5};
+\draw [fill=red!72.9016295987!blue,opacity=.4] (7.50,4.50) circle (0.36);
+\node at (7.50,4.50) {8,6};
+\draw [fill=red!14.7833714801!blue,opacity=.4] (7.50,3.50) circle (0.07);
+\node at (7.50,3.50) {8,7};
+\draw [fill=red!81.9931231021!blue,opacity=.4] (7.50,2.50) circle (0.41);
+\node at (7.50,2.50) {8,8};
+\draw [fill=red!44.4627278609!blue,opacity=.4] (7.50,1.50) circle (0.22);
+\node at (7.50,1.50) {8,9};
+\draw [fill=red!94.7458309421!blue,opacity=.4] (7.50,0.50) circle (0.47);
+\node at (7.50,0.50) {8,10};
+\draw [fill=red!42.7874013643!blue,opacity=.4] (8.50,9.50) circle (0.21);
+\node at (8.50,9.50) {9,1};
+\draw [fill=red!19.7709768628!blue,opacity=.4] (8.50,8.50) circle (0.10);
+\node at (8.50,8.50) {9,2};
+\draw [fill=red!96.3640029953!blue,opacity=.4] (8.50,7.50) circle (0.48);
+\node at (8.50,7.50) {9,3};
+\draw [fill=red!35.2881080679!blue,opacity=.4] (8.50,6.50) circle (0.18);
+\node at (8.50,6.50) {9,4};
+\draw [fill=red!41.7426757599!blue,opacity=.4] (8.50,5.50) circle (0.21);
+\node at (8.50,5.50) {9,5};
+\draw [fill=red!58.7679152539!blue,opacity=.4] (8.50,4.50) circle (0.29);
+\node at (8.50,4.50) {9,6};
+\draw [fill=red!35.3812819246!blue,opacity=.4] (8.50,3.50) circle (0.18);
+\node at (8.50,3.50) {9,7};
+\draw [fill=red!52.1759838574!blue,opacity=.4] (8.50,2.50) circle (0.26);
+\node at (8.50,2.50) {9,8};
+\draw [fill=red!71.4406151408!blue,opacity=.4] (8.50,1.50) circle (0.36);
+\node at (8.50,1.50) {9,9};
+\draw [fill=red!15.2672461672!blue,opacity=.4] (8.50,0.50) circle (0.08);
+\node at (8.50,0.50) {9,10};
+\draw [fill=red!4.68282109522!blue,opacity=.4] (9.50,9.50) circle (0.02);
+\node at (9.50,9.50) {10,1};
+\draw [fill=red!24.7478535575!blue,opacity=.4] (9.50,8.50) circle (0.12);
+\node at (9.50,8.50) {10,2};
+\draw [fill=red!56.9897294983!blue,opacity=.4] (9.50,7.50) circle (0.28);
+\node at (9.50,7.50) {10,3};
+\draw [fill=red!84.6539471755!blue,opacity=.4] (9.50,6.50) circle (0.42);
+\node at (9.50,6.50) {10,4};
+\draw [fill=red!59.1497080351!blue,opacity=.4] (9.50,5.50) circle (0.30);
+\node at (9.50,5.50) {10,5};
+\draw [fill=red!76.0735019638!blue,opacity=.4] (9.50,4.50) circle (0.38);
+\node at (9.50,4.50) {10,6};
+\draw [fill=red!48.2765646805!blue,opacity=.4] (9.50,3.50) circle (0.24);
+\node at (9.50,3.50) {10,7};
+\draw [fill=red!2.24830507263!blue,opacity=.4] (9.50,2.50) circle (0.01);
+\node at (9.50,2.50) {10,8};
+\draw [fill=red!77.0872373134!blue,opacity=.4] (9.50,1.50) circle (0.39);
+\node at (9.50,1.50) {10,9};
+\draw [fill=red!15.83391368!blue,opacity=.4] (9.50,0.50) circle (0.08);
+\node at (9.50,0.50) {10,10};
+
+\end{tikzpicture}
+
+
+
+\end{document}

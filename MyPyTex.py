@@ -45,8 +45,6 @@ class Table(object):
 			elif self.lines==0:
 				self.string=self.string[:-1]+"\\\\"
 		self.string = self.string + "\\end{tabular}" 
-		if self.center==1:
-			self.string="\\begin{center}\n %s\n \\end{center}"%(self.string)
  
 class Document(object):
 	def __init__(self):
@@ -110,20 +108,16 @@ class TIKZPlot(object):
 		self.update()
 	
 	def makeDefaults(self):
-		self.lineString='\\draw (0,0) -- (1,.8);'
+		self.lineString=''
 		self.lineStringOutside=''
 		full=os.path.abspath( __file__ )
 		start=full.rfind('/')
 		self.filename=full[start+1:].replace('.py','_output.tex')
 		self.path=full[:start+1]
-		self.caption='Test caption'
-		self.xscale=1.2
-		self.yscale=.7
-		self.scale=.75
-		self.center=0
+		self.xscale=1
+		self.yscale=1
+		self.scale=1
 		self.makeAxes()
-
-
 
 	def makeAxes(self):
 		self.xLabel=TIKZLabel()
@@ -131,7 +125,7 @@ class TIKZPlot(object):
 		self.xLabel.y=-1.25
 		self.xLabel.format='%s'
 		self.xLabel.attributes=''
-		self.xLabel.text="X Label"
+		self.xLabel.text="No Label"
 		self.xLabel.update()
 
 		self.yLabel=TIKZLabel()
@@ -139,7 +133,7 @@ class TIKZPlot(object):
 		self.yLabel.y=5
 		self.yLabel.format='%s'
 		self.yLabel.attributes='rotate=90'
-		self.yLabel.text="Y Label"
+		self.yLabel.text="No Label"
 		self.yLabel.update()
 
 		
@@ -186,17 +180,28 @@ class TIKZPlot(object):
 
 	def getExtremes(self):
 		allx=self.xTicks.ticks+self.xGrid.ticks+self.xTicks.labelPositions+self.xGrid.labelPositions
+		# print self.xTicks.labelPositions
+		# print allx
+		# raw_input() 
 		ally=self.yTicks.ticks+self.yGrid.ticks+self.yTicks.labelPositions+self.yGrid.labelPositions
 		coordinates=[eval(x) for x in re.findall(r"\(-?[0-9]*\.?[0-9]*,-?[0-9]*\.?[0-9]*\)",self.lineString)]
 		for p in coordinates:
 			allx.append(p[0])
 			ally.append(p[1])
 
-		xhigh=max(allx)
-		xlow=min(allx)
+		if allx!=[]:
+			xhigh=max(allx)
+			xlow=min(allx)
+		else:
+			xhigh=10
+			xlow=0
 
-		yhigh=max(ally)
-		ylow=min(ally)
+		if ally!=[]:
+			yhigh=max(ally)
+			ylow=min(ally)
+		else:
+			yhigh=10
+			ylow=0
 
 		self.xmult=float(9)/(xhigh-xlow)
 		self.xconst=xlow-float(.5)/self.xmult
@@ -250,10 +255,6 @@ class TIKZPlot(object):
 		plotString=plotString+self.transformPoints(self.replaceExtremes(self.lineString),type="both")
 		plotString=plotString+self.transformPoints(self.replaceExtremes(self.lineStringOutside),type="both")
 		
-		if self.caption=="":
-			captionString=""
-		else:
-			captionString="\\node at (\\xhigh/2-\\xlow/2,11) [rotate=0,fill=white] {%s};"%(self.caption)
 
 		self.string="""
 \\def\\xlow{0}
@@ -265,12 +266,9 @@ class TIKZPlot(object):
 \\def\\myscale{%.02f}
 
 \\begin{tikzpicture}[xscale=\\xscale,yscale=\\yscale]
-%s\n
 %s
 \\end{tikzpicture}
-""" %(self.xscale,self.yscale,self.scale,captionString,plotString)
-		if self.center==1:
-			self.string="\\begin{center}\n %s\n \\end{center}"%(self.string)
+""" %(self.xscale,self.yscale,self.scale,plotString)
 
 	def compile(self):
 		latexCompile.compile(self.filename,"regular")
@@ -279,6 +277,11 @@ class TIKZPlot(object):
 		makeDocument(self.filename,self.string)
 	def open(self):
 		openPDF(self.filename)
+
+
+class TIKZEmpty(object):
+	def __init__(self):
+		self.empty=1
 
 
 class TIKZLabel(object):
@@ -325,7 +328,7 @@ class TIKZGrid(object):
 
 	def setDefaults(self):
 		self.labels=[]
-		self.labelPositions=[.1*x for x in range(11)]
+		self.labelPositions=[]#[10*x for x in range(10)]
 		self.labelFormat='%s'
 		self.labelAttribute='anchor=north'
 		self.ticks=[]
@@ -338,53 +341,48 @@ class TIKZGrid(object):
 	def update(self):
 		print "labels",self.start,self.end
 		self.string=""
-		if self.ticks==[]:
-			ticks=self.labelPositions
-		else:
-			ticks=self.ticks
-			
-		
-		if self.labelFormat!="":
-
-			if self.labels==[]:
-				labels=[]
-				for i in self.labelPositions:
-					this=self.labelFormat%(i)
-					labels.append(this)
+		if self.labelPositions!=[]:
+			if self.ticks==[]:
+				ticks=self.labelPositions
 			else:
-				labels=self.labels
+				ticks=self.ticks
+				
+			
+			if self.labelFormat!="":
+
+				if self.labels==[]:
+					labels=[]
+					for i in self.labelPositions:
+						this=self.labelFormat%(i)
+						labels.append(this)
+				else:
+					labels=self.labels
 
 
-			for i,j in zip(self.labelPositions,labels):
-				thisPoint=[i,self.end/self.scale]
+				for i,j in zip(self.labelPositions,labels):
+					thisPoint=[i,self.end/self.scale]
+					if self.axis=="y":
+						thisPoint.reverse()
+					thisLabel=TIKZLabel()
+					thisLabel.x=thisPoint[0]
+					thisLabel.y=thisPoint[1]
+					thisLabel.format=self.labelFormat
+					thisLabel.attributes=self.labelAttribute
+					thisLabel.text=j
+					thisLabel.update()
+					self.string=self.string+thisLabel.string+"\n"
+			for i in ticks:
+				start=[i,self.start/self.scale]
+				end=[i,self.end/self.scale]
 				if self.axis=="y":
-					thisPoint.reverse()
-				thisLabel=TIKZLabel()
-				thisLabel.x=thisPoint[0]
-				thisLabel.y=thisPoint[1]
-				thisLabel.format=self.labelFormat
-				thisLabel.attributes=self.labelAttribute
-				thisLabel.text=j
-				thisLabel.update()
-				self.string=self.string+thisLabel.string+"\n"
-		for i in ticks:
-			start=[i,self.start/self.scale]
-			end=[i,self.end/self.scale]
-			if self.axis=="y":
-				start.reverse()
-				end.reverse()
+					start.reverse()
+					end.reverse()
 
-			thisTick=TIKZLine()
-			thisTick.points=[start,end]
-			thisTick.attributes=self.tickAttributes
-			thisTick.update()
-			self.string=self.string+thisTick.string+"\n"
-
-
-def ensure_dir(f):
-	d = os.path.dirname(f)
-	if not os.path.exists(d):
-		os.makedirs(d)
+				thisTick=TIKZLine()
+				thisTick.points=[start,end]
+				thisTick.attributes=self.tickAttributes
+				thisTick.update()
+				self.string=self.string+thisTick.string+"\n"
 
 
 
